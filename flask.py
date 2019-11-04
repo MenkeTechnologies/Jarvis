@@ -1,18 +1,24 @@
 #!/usr/bin/env python3
-#{{{ MARK:Header
-#**************************************************************
+# {{{ MARK:Header
+# **************************************************************
 ##### Author: MenkeTechnologies
 ##### GitHub: https://github.com/MenkeTechnologies
 ##### Date: Mon Nov  4 18:32:14 EST 2019
 ##### Purpose: python3 script to
 ##### Notes: env FLASK_APP=hello.py flask run
-#}}}***********************************************************
+# }}}***********************************************************
 
-from flask import Flask, escape, request
+from flask import Flask, render_template
 
-app = Flask(__name__)
+app = Flask('flaskwp1')
+
+
+# webcode = open('webcode.html').read() - not needed
 
 @app.route('/')
-def hello():
-    name = request.args.get("name", "World")
-    return f'Hello, {escape(name)}!'
+def webprint():
+    return render_template('webcode.html')
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=3000)
