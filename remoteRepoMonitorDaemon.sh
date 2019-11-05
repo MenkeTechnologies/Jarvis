@@ -28,9 +28,9 @@ gittersdev() {
 main() {
     gittersmaster
     echo "killing python3 webserver.py"
-    pkill python3
+    pkill -f webserver.py && echo killed
     echo "starting python3 webserver.py in background"
-    ( python3 webserver.py & >> $JARVIS_DIR/flask.log )
+    ( python3 webserver.py & 2>&1 >> $JARVIS_DIR/flask.log )
 }
 
 cd "$JARVIS_DIR" || {
@@ -39,9 +39,9 @@ cd "$JARVIS_DIR" || {
 }
 
 echo "killing python3 webserver.py"
-pkill python3
+pkill -f webserver.py && echo killed
 echo "starting python3 webserver.py in background"
-( python3 webserver.py & >> $JARVIS_DIR/flask.log )
+( python3 webserver.py & 2>&1 >> $JARVIS_DIR/flask.log )
 
 while true; do
 
