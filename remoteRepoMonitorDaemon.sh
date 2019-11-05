@@ -38,6 +38,12 @@ while true; do
         exit 1
     }
 
+
+    echo "starting python3 webserver.py"
+
+    ( python3 webserver.py & >> $JARVIS_DIR/flask.log )
+    tail -F "$JARVIS_DIR/flask.log"
+
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
 
