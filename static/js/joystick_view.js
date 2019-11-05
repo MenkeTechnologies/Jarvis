@@ -73,6 +73,7 @@ JoystickView = Backbone.View.extend({
         this.x = 0;
         this.y = 0;
         this.renderSprite();
+        this.trigger("end", 0);
     },
     move: function (evt) {
         if (this.state == INACTIVE) {
@@ -81,7 +82,6 @@ JoystickView = Backbone.View.extend({
         this.lastTouch = new Date().getTime();
 
         var x, y;
-
 
         if (evt.originalEvent && evt.originalEvent.touches) {
             evt.preventDefault();
@@ -145,6 +145,8 @@ JoystickView = Backbone.View.extend({
 
         this.x = Math.floor(toKeep * Math.abs(this.x)) * xSign;
         this.y = Math.floor(toKeep * Math.abs(this.y)) * ySign;
+
+
     },
     _traceNewValues: function () {
         var slope = this.y / this.x;

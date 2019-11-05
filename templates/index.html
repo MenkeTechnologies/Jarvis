@@ -30,6 +30,7 @@
                 callbackView.renderSprite();
             }, 0);
         });
+
         let xCoord = 0;
         let yCoord = 0;
         joystickView.bind("verticalMove", function (y) {
@@ -41,6 +42,11 @@
             xCoord = x;
             $("#xVal").html(xCoord);
             $.get("setcar", {x: xCoord, y: yCoord})
+        });
+        joystickView.bind("end", function (x) {
+            $("#xVal").html(0);
+            $("#yVal").html(0);
+            $.get("setcar", {x: 0, y: 0})
         });
     });
 
