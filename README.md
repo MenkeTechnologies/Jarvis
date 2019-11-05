@@ -1,6 +1,7 @@
 # jarvis
 # created by MenkeTechnologies
 
+```pip3 install flask```
 
 ```python3 webserver.py```
 
