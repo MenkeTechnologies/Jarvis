@@ -30,13 +30,18 @@ main() {
     echo "killing python3 webserver.py"
     pkill python3
     echo "starting python3 webserver.py in background"
-    ( python3 $JARVIS_DIR/webserver.py & >> $JARVIS_DIR/flask.log )
+    ( python3 webserver.py & >> $JARVIS_DIR/flask.log )
+}
+
+cd "$JARVIS_DIR" || {
+    echo "$(date) Directory $JARVIS_DIR does not exist" >&2
+    exit 1
 }
 
 echo "killing python3 webserver.py"
 pkill python3
 echo "starting python3 webserver.py in background"
-( python3 $JARVIS_DIR/webserver.py & >> $JARVIS_DIR/flask.log )
+( python3 webserver.py & >> $JARVIS_DIR/flask.log )
 
 while true; do
 
