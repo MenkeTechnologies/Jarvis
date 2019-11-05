@@ -33,6 +33,11 @@ main() {
     ( python3 webserver.py & >> $JARVIS_DIR/flask.log )
 }
 
+echo "killing python3 webserver.py"
+pkill python3
+echo "starting python3 webserver.py in background"
+( python3 webserver.py & >> $JARVIS_DIR/flask.log )
+
 while true; do
 
     cd "$JARVIS_DIR" || {
@@ -40,12 +45,7 @@ while true; do
         exit 1
     }
 
-
-    echo "killing python3 webserver.py"
-    pkill python3
-    echo "starting python3 webserver.py in background"
-    ( python3 webserver.py & >> $JARVIS_DIR/flask.log )
-    tail -F "$JARVIS_DIR/flask.log"
+    #tail -F "$JARVIS_DIR/flask.log"
 
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
