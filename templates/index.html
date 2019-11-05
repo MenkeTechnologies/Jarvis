@@ -24,17 +24,23 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        var joystickView = new JoystickView(500, function (callbackView) {
+        let joystickView = new JoystickView(500, function (callbackView) {
             $("#joystickContent").append(callbackView.render().el);
             setTimeout(function () {
                 callbackView.renderSprite();
             }, 0);
         });
+        let xCoord = 0;
+        let yCoord = 0;
         joystickView.bind("verticalMove", function (y) {
-            $("#yVal").html(y);
+            yCoord = y;
+            $("#yVal").html(yCoord);
+            $.get("setcar", {x: xCoord, y: yCoord})
         });
         joystickView.bind("horizontalMove", function (x) {
-            $("#xVal").html(x);
+            xCoord = x;
+            $("#xVal").html(xCoord);
+            $.get("setcar", {x: xCoord, y: yCoord})
         });
     });
 
