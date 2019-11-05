@@ -1,0 +1,13 @@
+[Unit]
+Description=jarvis poll service
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+ExecStart=/usr/bin/env bash /home/pi/Jarvis/remoteRepoMonitorDaemon.sh
+ExecStop=/usr/bin/env kill $MAINPID
+
+[Install]
+WantedBy=multi-user.target
