@@ -41,12 +41,12 @@
         joystickView.bind("horizontalMove", function (x) {
             xCoord = x;
             $("#xVal").html(xCoord);
-            $.get("setcar", {x: xCoord, y: yCoord})
+            $.get("localhost:3000/setcar", {x: xCoord, y: yCoord})
         });
         joystickView.bind("end", function (x) {
             $("#xVal").html(0);
             $("#yVal").html(0);
-            $.get("setcar", {x: 0, y: 0})
+            $.get("localhost:3000/setcar", {x: 0, y: 0})
         });
     });
 
