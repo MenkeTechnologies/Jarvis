@@ -1,9 +1,9 @@
-var INACTIVE = 0;
-var ACTIVE = 1;
-var SECONDS_INACTIVE = 0.5;
+let INACTIVE = 0;
+let ACTIVE = 1;
+let SECONDS_INACTIVE = 0.5;
 
 function loadSprite(src, callback) {
-    var sprite = new Image();
+    let sprite = new Image();
     sprite.onload = callback;
     sprite.src = src;
     return sprite;
@@ -48,10 +48,10 @@ JoystickView = Backbone.View.extend({
         });
     },
     _retractJoystickForInactivity: function () {
-        var framesPerSec = 15;
-        var self = this;
+        let framesPerSec = 15;
+        let self = this;
         setTimeout(function () {
-            var currentTime = new Date().getTime();
+            let currentTime = new Date().getTime();
             if (currentTime - self.lastTouch >= SECONDS_INACTIVE * 1000) {
                 self._retractToMiddle();
                 self.renderSprite();
@@ -61,7 +61,7 @@ JoystickView = Backbone.View.extend({
     },
     _tryCallback: function () {
         if (this.backgroundLoaded && this.joyStickLoaded) {
-            var self = this;
+            let self = this;
             this.finishedLoadCallback(self);
         }
     },
@@ -81,12 +81,12 @@ JoystickView = Backbone.View.extend({
         }
         this.lastTouch = new Date().getTime();
 
-        var x, y;
+        let x, y;
 
         if (evt.originalEvent && evt.originalEvent.touches) {
             evt.preventDefault();
-            var left = 0;
-            var fromTop = 0;
+            let left = 0;
+            let fromTop = 0;
             elem = $(this.canvas)[0];
             while (elem) {
                 left = left + parseInt(elem.offsetLeft);
@@ -103,8 +103,8 @@ JoystickView = Backbone.View.extend({
         this._triggerChange();
     },
     _triggerChange: function () {
-        var xPercent = this.x / this.radius;
-        var yPercent = this.y / this.radius;
+        let xPercent = this.x / this.radius;
+        let yPercent = this.y / this.radius;
         if (Math.abs(xPercent) > 1.0) {
             xPercent /= Math.abs(xPercent);
         }
@@ -130,11 +130,11 @@ JoystickView = Backbone.View.extend({
         this.renderSprite();
     },
     _retractToMiddle: function () {
-        var percentLoss = 0.1;
-        var toKeep = 1.0 - percentLoss;
+        let percentLoss = 0.1;
+        let toKeep = 1.0 - percentLoss;
 
-        var xSign = 1;
-        var ySign = 1;
+        let xSign = 1;
+        let ySign = 1;
 
         if (this.x != 0) {
             xSign = this.x / Math.abs(this.x);
@@ -149,13 +149,13 @@ JoystickView = Backbone.View.extend({
 
     },
     _traceNewValues: function () {
-        var slope = this.y / this.x;
-        var xIncr = 1;
+        let slope = this.y / this.x;
+        let xIncr = 1;
         if (this.x < 0) {
             xIncr = -1;
         }
-        for (var x = 0; x < this.squareSize / 2; x += xIncr) {
-            var y = x * slope;
+        for (let x = 0; x < this.squareSize / 2; x += xIncr) {
+            let y = x * slope;
             if (this._valuesExceedRadius(x, y)) {
                 break;
             }
@@ -164,8 +164,8 @@ JoystickView = Backbone.View.extend({
         this.y = y;
     },
     _cartesianToCanvas: function (x, y) {
-        var newX = x + this.squareSize / 2;
-        var newY = y - (this.squareSize / 2);
+        let newX = x + this.squareSize / 2;
+        let newY = y - (this.squareSize / 2);
         newY = newY * -1;
         return {
             x: newX,
@@ -179,21 +179,21 @@ JoystickView = Backbone.View.extend({
         return Math.pow(x, 2) + Math.pow(y, 2) > Math.pow(this.radius, 2);
     },
     renderSprite: function () {
-        var originalWidth = 89;
-        var originalHeight = 89;
+        let originalWidth = 89;
+        let originalHeight = 89;
 
-        var spriteWidth = 50;
-        var spriteHeight = 50;
-        var pixelsLeft = 0; //ofset for sprite on img
-        var pixelsTop = 0; //offset for sprite on img
-        var coords = this._cartesianToCanvas(this.x, this.y);
+        let spriteWidth = 50;
+        let spriteHeight = 50;
+        let pixelsLeft = 0; //ofset for sprite on img
+        let pixelsTop = 0; //offset for sprite on img
+        let coords = this._cartesianToCanvas(this.x, this.y);
         if (this.context == null) {
             return;
         }
         // hack dunno why I need the 2x
         this.context.clearRect(0, 0, this.squareSize * 2, this.squareSize);
 
-        var backImageSize = 300;
+        let backImageSize = 300;
         this.context.drawImage(this.background,
             0,
             0,
@@ -216,7 +216,7 @@ JoystickView = Backbone.View.extend({
         );
     },
     render: function () {
-        var renderData = {
+        let renderData = {
             squareSize: this.squareSize
         };
         this.$el.html(this.template(renderData));

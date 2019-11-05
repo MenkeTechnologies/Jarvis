@@ -14,16 +14,19 @@
     </canvas>
 </script>
 
-<div id="joystickContent">
-</div>
+<div id="joystickContent"></div>
 <div>
-    x: <span id="xVal"></span><br/>
-    y: <span id="yVal"></span><br/>
+    <p>
+        x: <span id="xVal"></span>
+    </p>
+    <p>
+        y: <span id="yVal"></span>
+    </p>
 </div>
 
-<script type="text/javascript">
+<script>
 
-    $(document).ready(function () {
+    $(function () {
         let joystickView = new JoystickView(500, function (callbackView) {
             $("#joystickContent").append(callbackView.render().el);
             setTimeout(function () {
