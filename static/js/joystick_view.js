@@ -38,11 +38,11 @@ JoystickView = Backbone.View.extend({
         setTimeout(function () {
             //self._retractJoystickForInactivity();
         }, 1000);
-        this.sprite = loadSprite("img/button.png", function () {
+        this.sprite = loadSprite("static/img/button.png", function () {
             self.joyStickLoaded = true;
             self._tryCallback();
         });
-        this.background = loadSprite("img/canvas.png", function () {
+        this.background = loadSprite("static/img/canvas.png", function () {
             self.backgroundLoaded = true;
             self._tryCallback();
         });
