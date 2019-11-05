@@ -12,3 +12,6 @@ go to http://localhost:3000/
 # Features
 
 - CI/CD shell script to restart flask app when push to master branch
+- jQuery, Backbone
+- ajax
+- Bootstrap CSS library
