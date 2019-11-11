@@ -10,7 +10,10 @@
 
 from flask import Flask, render_template, request
 import sys
-
+import smbus
+channel = 1
+address = 0xa
+bus = smbus.SMBus(1)
 app = Flask("jarvis")
 
 @app.route('/')
@@ -19,9 +22,13 @@ def webprint():
 
 @app.route('/setcar')
 def setcar():
-    x = request.args.get("x")
-    y = request.args.get("y")
-    print(f"we got {x} and {y}")
+    xpos = float(request.args.get("x"))
+    ypos = float(request.args.get("y"))
+    ESCset = 45*ypos+90
+    turnSet =90*xpos+90
+    data = [int(turnSet),int(ESCset)]
+    bus.write_i2c_block_data(address, 1,data) 
+    print(f"we got {xpos} and {ypos}")
     return ""
 
 
