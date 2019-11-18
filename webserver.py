@@ -36,6 +36,8 @@ def setcar():
         data = [int(turnSet),int(ESCset)]
         bus.write_i2c_block_data(address, 1,data)
         print(f"we got {xpos} and {ypos}")
+    else:
+        print(f"time diff was {time_diff}")
     return ""
 
 
