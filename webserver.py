@@ -15,6 +15,9 @@ channel = 1
 address = 0xa
 bus = smbus.SMBus(1)
 app = Flask("jarvis")
+import time
+prev_time = time.time()
+
 
 @app.route('/')
 def webprint():
@@ -22,13 +25,17 @@ def webprint():
 
 @app.route('/setcar')
 def setcar():
-    xpos = float(request.args.get("x"))
-    ypos = float(request.args.get("y"))
-    ESCset = 45*ypos+90
-    turnSet =90*xpos+90
-    data = [int(turnSet),int(ESCset)]
-    bus.write_i2c_block_data(address, 1,data) 
-    print(f"we got {xpos} and {ypos}")
+    cur_time = time.time()
+    time_diff = cur_time - prev_time
+
+    if time_diff > 40:
+        xpos = float(request.args.get("x"))
+        ypos = float(request.args.get("y"))
+        ESCset = 45*ypos+90
+        turnSet =90*xpos+90
+        data = [int(turnSet),int(ESCset)]
+        bus.write_i2c_block_data(address, 1,data)
+        print(f"we got {xpos} and {ypos}")
     return ""
 
 
