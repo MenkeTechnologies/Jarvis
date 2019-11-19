@@ -26,6 +26,17 @@
 
 <script>
 
+    let ws = new WebSocket("ws://127.0.0.1:8765/"),
+        messages = document.createElement('ul');
+
+    ws.onopen = function () {
+        console.log("opened WebSocket");
+    };
+
+    ws.onclose = function () {
+        console.log("closed WebSocket");
+    };
+
     $(function () {
         let joystickView = new JoystickView(500, function (callbackView) {
             $("#joystickContent").append(callbackView.render().el);
@@ -39,17 +50,17 @@
         joystickView.bind("verticalMove", function (y) {
             yCoord = y;
             $("#yVal").html(yCoord);
-            $.get("setcar", {x: xCoord, y: yCoord})
+            ws.send(`${xCoord}:${yCoord}`)
         });
         joystickView.bind("horizontalMove", function (x) {
             xCoord = x;
             $("#xVal").html(xCoord);
-            $.get("localhost:3000/setcar", {x: xCoord, y: yCoord})
+            ws.send(`${xCoord}:${yCoord}`)
         });
         joystickView.bind("end", function (x) {
             $("#xVal").html(0);
             $("#yVal").html(0);
-            $.get("localhost:3000/setcar", {x: 0, y: 0})
+            ws.send(`${xCoord}:${yCoord}`)
         });
     });
 

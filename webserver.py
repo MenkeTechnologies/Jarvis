@@ -10,10 +10,10 @@
 
 from flask import Flask, render_template, request
 import sys
-import smbus
+# import smbus
 channel = 1
 address = 0xa
-bus = smbus.SMBus(1)
+# bus = smbus.SMBus(1)
 app = Flask("jarvis")
 import time
 prev_time = time.time()
