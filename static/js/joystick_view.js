@@ -154,8 +154,8 @@ JoystickView = Backbone.View.extend({
         if (this.x < 0) {
             xIncr = -1;
         }
-        for (let x = 0; x < this.squareSize / 2; x += xIncr) {
-            let y = x * slope;
+        for (var x = 0; x < this.squareSize / 2; x += xIncr) {
+            var y = x * slope;
             if (this._valuesExceedRadius(x, y)) {
                 break;
             }
