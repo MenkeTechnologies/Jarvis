@@ -5,6 +5,9 @@ import websockets
 
 import smbus
 bus = smbus.SMBus(1)
+channel = 1
+address = 0xa
+
 async def hello(websocket, path):
     prev = time.time()
     while True:
