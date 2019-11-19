@@ -25,12 +25,20 @@ gittersdev() {
     git reset --hard origin/dev
 }
 
+killa() {
+    echo "killing python3 webserver.py"
+    pkill -f webserver.py && echo killed flask
+    echo "killing python3 sockets.py"
+    pkill -f sockets.py && echo killed sockets
+    echo "starting webserver.py in background"
+    python3 webserver.py &
+    echo "starting sockets.py in background"
+    python3 sockets.py &
+}
+
 main() {
     gittersmaster
-    echo "killing python3 webserver.py"
-    pkill -f webserver.py && echo killed
-    echo "starting python3 webserver.py in background"
-    python3 webserver.py &
+    killa
 }
 
 cd "$JARVIS_DIR" || {
@@ -38,10 +46,7 @@ cd "$JARVIS_DIR" || {
     exit 1
 }
 
-echo "killing python3 webserver.py"
-pkill -f webserver.py && echo killed
-echo "starting python3 webserver.py in background"
-python3 webserver.py &
+killa
 
 while true; do
 
