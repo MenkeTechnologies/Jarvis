@@ -17,7 +17,7 @@ else
 fi
 
 
-trap 'kill $pid1 $pid2' INT QUIT
+trap 'kill $pid1 $pid2;exit 1' INT QUIT
 
 export IP=$IP
 echo "global ip is $IP"
