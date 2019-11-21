@@ -16,7 +16,7 @@ prev_time = time.time()
 
 if "IP" in os.environ:
     ip = os.environ.get("IP")
-    print(f"IP {ip}from environ")
+    print(f"IP {ip} from environ")
 else:
     ip = "127.0.0.1"
     print("could not get IP from environ")
