@@ -3,15 +3,15 @@ import time
 
 import websockets
 
-import smbus
-bus = smbus.SMBus(1)
+# import smbus
+# bus = smbus.SMBus(1)
 channel = 1
 address = 0xa
 
 async def hello(websocket, path):
     prev = time.time()
+    print("connected")
     while True:
-        # print("awaiting")
         coords = await websocket.recv()
         # print("got")
         now = time.time()
@@ -25,12 +25,12 @@ async def hello(websocket, path):
             ESCset = 45 * float(y) + 90
             turnSet = 90 * float(x) + 90
             data = [int(turnSet), int(ESCset)]
-            bus.write_i2c_block_data(address, 1, data)
+            # bus.write_i2c_block_data(address, 1, data)
         else:
             pass
 
 
-start_server = websockets.serve(hello, "localhost", 8765)
+start_server = websockets.serve(hello, "0.0.0.0", 8765)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
