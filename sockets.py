@@ -4,6 +4,8 @@ import time
 import websockets
 
 import smbus
+
+ARDUINO_WAIT = 0.040
 bus = smbus.SMBus(1)
 channel = 1
 address = 0xa
@@ -16,7 +18,7 @@ async def hello(websocket, path):
         now = time.time()
         diff = now - prev
         # 100ms min time between calls to arduino
-        if diff > 0.1:
+        if diff > ARDUINO_WAIT:
             x = coords.split(":")[0]
             y = coords.split(":")[1]
             print(f"time diff was {diff}, x {x} and y {y}")
