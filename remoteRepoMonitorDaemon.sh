@@ -9,6 +9,11 @@
 
 JARVIS_DIR="$HOME/Jarvis"
 
+IP=$(curl icanhazip.com)
+
+export $IP
+echo "global ip is $IP"
+
 [[ ! -d "$JARVIS_DIR" ]] && echo "no $JARVIS_DIR" >&2 && exit 1
 
 gittersmaster() {
