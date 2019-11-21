@@ -3,8 +3,8 @@ import time
 
 import websockets
 
-# import smbus
-# bus = smbus.SMBus(1)
+import smbus
+bus = smbus.SMBus(1)
 channel = 1
 address = 0xa
 
@@ -13,7 +13,6 @@ async def hello(websocket, path):
     print("connected")
     while True:
         coords = await websocket.recv()
-        # print("got")
         now = time.time()
         diff = now - prev
         # 100ms min time between calls to arduino
@@ -25,7 +24,7 @@ async def hello(websocket, path):
             ESCset = 45 * float(y) + 90
             turnSet = 90 * float(x) + 90
             data = [int(turnSet), int(ESCset)]
-            # bus.write_i2c_block_data(address, 1, data)
+            bus.write_i2c_block_data(address, 1, data)
         else:
             pass
 
