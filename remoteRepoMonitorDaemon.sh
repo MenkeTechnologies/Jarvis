@@ -16,6 +16,9 @@ else
   echo "no IP.sh"
 fi
 
+
+trap 'kill $pid1 $pid2' INT QUIT
+
 export IP=$IP
 echo "global ip is $IP"
 
@@ -43,8 +46,10 @@ killa() {
     pkill -f sockets.py && echo killed sockets
     echo "starting webserver.py in background"
     python3 webserver.py &
+    pid1=$!
     echo "starting sockets.py in background"
     python3 sockets.py &
+    pid2=$!
 }
 
 main() {
