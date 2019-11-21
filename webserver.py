@@ -14,7 +14,7 @@ app = Flask("jarvis")
 import time
 prev_time = time.time()
 
-if "IP" in os.environ.items():
+if "IP" in os.environ:
     ip = os.environ.get("IP")
     print(f"IP {ip}from environ")
 else:
