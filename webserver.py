@@ -19,8 +19,10 @@ prev_time = time.time()
 def webprint():
     if "IP" in os.environ.items():
         ip = os.environ.get("IP")
+        print(f"IP {ip}from environ")
     else:
         ip = "127.0.0.1"
+        print("could not get IP from environ")
     return render_template('index.html', ip=ip)
 
 @app.route('/setcar')
