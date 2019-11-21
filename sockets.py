@@ -5,7 +5,7 @@ import websockets
 
 import smbus
 
-ARDUINO_WAIT = 0.040
+ARDUINO_WAIT = 0.050
 bus = smbus.SMBus(1)
 channel = 1
 address = 0xa
