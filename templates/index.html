@@ -26,7 +26,7 @@
 
 <script>
 
-    let ws = new WebSocket("ws://{{ ip }}:8765/"),
+    let ws = new WebSocket("ws://{{ ip }}:8765"),
         messages = document.createElement('ul');
 
     ws.onopen = function () {
