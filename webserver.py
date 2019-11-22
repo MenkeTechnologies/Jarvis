@@ -8,14 +8,22 @@
 ##### Notes: env FLASK_APP=hello.py flask run
 # }}}***********************************************************
 
+import os
 from flask import Flask, render_template, request
 app = Flask("jarvis")
 import time
 prev_time = time.time()
 
+if "IP" in os.environ:
+    ip = os.environ.get("IP")
+    print(f"IP {ip} from environ")
+else:
+    ip = "127.0.0.1"
+    print("could not get IP from environ")
+
 @app.route('/')
 def webprint():
-    return render_template('index.html')
+    return render_template('index.html', ip=ip)
 
 @app.route('/setcar')
 def setcar():

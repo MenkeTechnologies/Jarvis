@@ -9,6 +9,20 @@
 
 JARVIS_DIR="$HOME/Jarvis"
 
+if [[ -f $HOME/IP.sh ]];then
+  source $HOME/IP.sh
+  echo "IP is $IP"
+else
+  echo "no IP.sh"
+fi
+
+
+trap 'kill $pid1 $pid2;exit 1' INT QUIT
+
+export IP=$IP
+echo "global ip is $IP"
+
+
 [[ ! -d "$JARVIS_DIR" ]] && echo "no $JARVIS_DIR" >&2 && exit 1
 
 gittersmaster() {
@@ -32,8 +46,10 @@ killa() {
     pkill -f sockets.py && echo killed sockets
     echo "starting webserver.py in background"
     python3 webserver.py &
+    pid1=$!
     echo "starting sockets.py in background"
     python3 sockets.py &
+    pid2=$!
 }
 
 main() {

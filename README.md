@@ -3,7 +3,11 @@
 
 ```pip3 install flask```
 
+```pip3 install websokets```
+
 ```python3 webserver.py```
+
+```python3 sockets.py```
 
 # To Run
 
