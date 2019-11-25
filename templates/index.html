@@ -60,7 +60,8 @@
         joystickView.bind("end", function (x) {
             $("#xVal").html(0);
             $("#yVal").html(0);
-            ws.send(`${xCoord}:${yCoord}`)
+            console.log(`end`)
+            ws.send(`0:0`)
         });
     });
 
