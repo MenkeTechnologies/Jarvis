@@ -30,6 +30,7 @@ if os.environ.get('CAMERA'):
 else:
     from camera import Camera
 
+
 def gen(camera):
     """Video streaming generator function."""
     while True:

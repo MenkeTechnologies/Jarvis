@@ -1,14 +1,14 @@
 import asyncio
 import time
 
-import websockets
-
 import smbus
+import websockets
 
 ARDUINO_WAIT = 0.050
 bus = smbus.SMBus(1)
 channel = 1
 address = 0xa
+
 
 async def hello(websocket, path):
     prev = time.time()
