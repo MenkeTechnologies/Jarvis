@@ -9,20 +9,26 @@
 # }}}***********************************************************
 
 import os
-from flask import Flask, render_template, request, Response
-from camera_pi import Camera
+from importlib import import_module
+
+from flask import Flask, render_template, Response
 
 app = Flask("jarvis")
 import time
+
 prev_time = time.time()
 
-if "IP" in os.environ:
+if os.environ.get("IP"):
     ip = os.environ.get("IP")
     print(f"IP {ip} from environ")
 else:
     ip = "127.0.0.1"
     print("could not get IP from environ")
 
+if os.environ.get('CAMERA'):
+    Camera = import_module('camera_' + os.environ['CAMERA']).Camera
+else:
+    from camera import Camera
 
 def gen(camera):
     """Video streaming generator function."""
@@ -30,6 +36,7 @@ def gen(camera):
         frame = camera.get_frame()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
 
 @app.route('/')
 def webprint():
@@ -41,23 +48,6 @@ def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
     return Response(gen(Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
-
-@app.route('/setcar')
-def setcar():
-    global prev_time
-    cur_time = time.time()
-    time_diff = cur_time - prev_time
-
-    if time_diff > .4:
-        prev_time = time.time()
-        print(f"time diff was {time_diff}")
-        xpos = float(request.args.get("x"))
-        ypos = float(request.args.get("y"))
-        print(f"we got {xpos} and {ypos}")
-    else:
-        pass
-        # print(f"time diff was {time_diff}")
-    return ""
 
 
 if __name__ == '__main__':
