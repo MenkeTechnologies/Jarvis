@@ -40,8 +40,9 @@ gittersdev() {
 }
 
 killa() {
-    echo "killing python3 webserver.py"
-    pkill -f webserver.py && echo killed flask
+    echo "killing gunicorn webserver.py"
+    pkill -f gunicorn && echo killed gunicorn
+    gunicorn --threads 5 --workers 1 --bind 0.0.0.0:3000 webserver:app
     echo "killing python3 sockets.py"
     pkill -f sockets.py && echo killed sockets
     echo "starting webserver.py in background"
