@@ -1,0 +1,21 @@
+#stream-content * {
+    margin: 0 auto;
+    display: block;
+}
+
+#joystickContent * {
+    display: block;
+    margin: 0 auto;
+}
+#coord {
+    font-size: 40px;
+    text-transform: uppercase;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#stream {
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
