@@ -9,7 +9,9 @@
 # }}}***********************************************************
 
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
+from camera_pi import Camera
+
 app = Flask("jarvis")
 import time
 prev_time = time.time()
@@ -21,9 +23,24 @@ else:
     ip = "127.0.0.1"
     print("could not get IP from environ")
 
+
+def gen(camera):
+    """Video streaming generator function."""
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
 @app.route('/')
 def webprint():
     return render_template('index.html', ip=ip)
+
+
+@app.route('/video_feed')
+def video_feed():
+    """Video streaming route. Put this in the src attribute of an img tag."""
+    return Response(gen(Camera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/setcar')
 def setcar():

@@ -3,10 +3,10 @@ import time
 
 import websockets
 
-import smbus
+# import smbus
 
 ARDUINO_WAIT = 0.050
-bus = smbus.SMBus(1)
+# bus = smbus.SMBus(1)
 channel = 1
 address = 0xa
 
@@ -26,7 +26,7 @@ async def hello(websocket, path):
             ESCset = 45 * float(y) + 90
             turnSet = 90 * float(x) + 90
             data = [int(turnSet), int(ESCset)]
-            bus.write_i2c_block_data(address, 1, data)
+            # bus.write_i2c_block_data(address, 1, data)
         else:
             pass
 
