@@ -16,6 +16,19 @@
 python3 sockets.py
 ```
 
+## create IP.sh with home directory with env vars of IP and CAMERA
+- IP should be your external IP (necessary for websockets)
+- CAMERA should be pi or opencv
+- There env vars are read by flask webapp
+- IP when empty defaults to localhost for websocket IP
+- CAMERA when empty defauts to showing sequence of 3 images instead of video stream
+
+```sh
+export IP=0.0.0.0
+export CAMERA=pi
+
+```
+
 ## To start the Flask server on port 3000:
 
 ```sh
