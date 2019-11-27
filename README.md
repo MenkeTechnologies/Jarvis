@@ -16,7 +16,7 @@
 python3 sockets.py
 ```
 
-## create IP.sh with home directory with env vars of IP and CAMERA
+## create IP.sh file in home directory with environment vars of IP and CAMERA
 - IP should be your external IP (necessary for websockets)
 - CAMERA should be pi or opencv
 - There env vars are read by flask webapp
