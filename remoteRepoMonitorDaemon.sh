@@ -40,13 +40,12 @@ gittersdev() {
 }
 
 killa() {
-    echo "killing gunicorn webserver.py"
-    pkill -f gunicorn && echo killed gunicorn
-    gunicorn --threads 5 --workers 1 --bind 0.0.0.0:3000 webserver:app
     echo "killing python3 sockets.py"
-    pkill -f sockets.py && echo killed sockets
-    echo "starting webserver.py in background"
-    python3 webserver.py &
+    pkill -f sockets.py && echo killed sockets || echo could not kill sockets
+    echo "killing gunicorn webserver.py"
+    pkill -f gunicorn && echo killed gunicorn || echo could not kill gunicorn
+    echo "starting gunicorn webserver.py in background"
+    gunicorn --threads 5 --workers 1 --bind 0.0.0.0:3000 webserver:app &
     pid1=$!
     echo "starting sockets.py in background"
     python3 sockets.py &
