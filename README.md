@@ -1,21 +1,37 @@
 # jarvis
-# created by MenkeTechnologies
 
+
+## Deps
 ```pip3 install flask```
 
-```pip3 install websokets```
+```pip3 install websockets```
 
-```python3 webserver.py```
+```pip3 install gunicorn```
 
-```python3 sockets.py```
 
-# To Run
+## To start the websocket on port 8765
 
-go to http://localhost:3000/
+```sh
+python3 sockets.py
+```
 
-# Features
+## To start the Flask server on port 3000:
 
-- CI/CD shell script to restart flask app when push to master branch
+```sh
+gunicorn --threads 5 --workers 1 --bind 0.0.0.0:3000 webserver:app
+```
+
+## To Run
+
+browser to http://localhost:3000
+
+## Features
+
+- Runs on RPi
+- Flask web app with real time video steaming with MJPEG
+- Websockets to arduino I2C bus
 - jQuery, Backbone
-- ajax
 - Bootstrap CSS library
+- CI/CD shell script managed by systemd service to restart flask app and websockets when push to master branch
+
+# created by MenkeTechnologies
