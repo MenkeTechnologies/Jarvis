@@ -1,6 +1,6 @@
 # jarvis
 
-![jarvis](screen.png)
+![jarvis](jarvis.png)
 
 ## Deps
 ```pip3 install flask```
