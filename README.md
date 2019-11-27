@@ -1,4 +1,4 @@
-# jarvis
+# jarvis - browser controlled vehicle with video stream
 
 ![jarvis](jarvis.png)
 
@@ -30,7 +30,7 @@ browser to http://localhost:3000
 
 - Runs on RPi
 - Flask web app with real time video steaming with MJPEG
-- Websockets to arduino I2C bus
+- Websockets to arduino I2C bus controlling motors
 - jQuery, Backbone
 - Bootstrap CSS library
 - CI/CD shell script managed by systemd service to restart flask app and websockets when push to master branch
