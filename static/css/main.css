@@ -1,11 +1,18 @@
 #stream-content * {
-    margin: 0 auto;
-    display: block;
+    display: inline-block !important;
+}
+
+#stream-content {
+
+    display: inline-block !important;
 }
 
 #joystickContent * {
-    display: block;
-    margin: 0 auto;
+    display: inline-block;
+}
+
+#joystickContent {
+    display: inline-block;
 }
 #coord {
     font-size: 40px;
