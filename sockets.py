@@ -14,18 +14,21 @@ async def hello(websocket, path):
     prev = time.time()
     print("connected")
     while True:
-        coords = await websocket.recv()
+        msg = await websocket.recv()
         now = time.time()
         diff = now - prev
         if diff > ARDUINO_WAIT:
-            x = coords.split(":")[0]
-            y = coords.split(":")[1]
-            print(f"time diff was {diff}, x {x} and y {y}")
-            prev = time.time()
-            ESCset = 45 * float(y) + 90
-            turnSet = 90 * float(x) + 90
-            data = [int(turnSet), int(ESCset)]
-            bus.write_i2c_block_data(address, 1, data)
+            cmdType = msg.split("-")[0]
+            cmd = msg.split("-")[1]
+            if cmdType == "joystick":
+                x = msg.split(":")[0]
+                y = msg.split(":")[1]
+                print(f"time diff was {diff}, x {x} and y {y}")
+                prev = time.time()
+                ESCset = 45 * float(y) + 90
+                turnSet = 90 * float(x) + 90
+                data = [int(turnSet), int(ESCset)]
+                bus.write_i2c_block_data(address, 1, data)
         else:
             pass
 

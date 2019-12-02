@@ -160,18 +160,18 @@
         joystickView.bind("verticalMove", function (y) {
             yCoord = y;
             $("#yVal").html(yCoord);
-            ws.send(`${xCoord}:${yCoord}`);
+            ws.send(`joystick-${xCoord}:${yCoord}`);
         });
         joystickView.bind("horizontalMove", function (x) {
             xCoord = x;
             $("#xVal").html(xCoord);
-            ws.send(`${xCoord}:${yCoord}`);
+            ws.send(`joystick-${xCoord}:${yCoord}`);
         });
         joystickView.bind("end", function (x) {
             $("#xVal").html(0);
             $("#yVal").html(0);
             console.log(`end`);
-            ws.send(`0:0`);
+            ws.send(`joystick-0:0`);
         });
     });
 </script>
