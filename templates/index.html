@@ -148,7 +148,20 @@
     };
 
     $(function () {
-        let joystickView = new JoystickView(500, function (callbackView) {
+
+
+        let browserWidth = $(window).width();
+
+        let joystickViewWidth = 0;
+        if (browserWidth > 700){
+           joystickViewWidth = 500
+        } else if (browserWidth > 500) {
+            joystickViewWidth = 400;
+        } else {
+            joystickViewWidth = 300
+        }
+        console.log("\n_____________joystickViewWidth = " + joystickViewWidth + "_____________\n");
+        let joystickView = new JoystickView(joystickViewWidth, function (callbackView) {
             $("#joystickContent").append(callbackView.render().el);
             setTimeout(function () {
                 callbackView.renderSprite();
