@@ -9,10 +9,12 @@
 
 #joystickContent * {
     display: inline-block;
+    margin: 0 auto;
 }
 
 #joystickContent {
     display: inline-block;
+    margin: 0 auto;
 }
 #coord {
     font-size: 40px;
