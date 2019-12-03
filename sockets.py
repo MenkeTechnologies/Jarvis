@@ -18,6 +18,7 @@ async def hello(websocket, path):
         now = time.time()
         diff = now - prev
         if diff > ARDUINO_WAIT:
+            print(f"\n_____________msg = {msg}_____________\n")
             cmdType = msg.split("-")[0]
             cmd = msg.split("-")[1]
             if cmdType == "joystick":
