@@ -1,8 +1,10 @@
 import asyncio
+import sys
 import time
 
 import smbus
 import websockets
+
 import util
 
 ARDUINO_WAIT = 0.050
@@ -29,7 +31,10 @@ async def hello(websocket, path):
                 ESCset = 45 * float(y) + 90
                 turnSet = 90 * float(x) + 90
                 data = [int(turnSet), int(ESCset)]
-                bus.write_i2c_block_data(address, 1, data)
+                try:
+                    bus.write_i2c_block_data(address, 1, data)
+                except:
+                    print("could not write to i2c", file=sys.stderr)
         else:
             pass
 
