@@ -3,6 +3,7 @@ import time
 
 import smbus
 import websockets
+import util
 
 ARDUINO_WAIT = 0.050
 bus = smbus.SMBus(1)
@@ -20,16 +21,16 @@ async def hello(websocket, path):
         if diff > ARDUINO_WAIT:
             print(f"\n_____________msg = {msg}_____________\n")
             cmdType = msg.split("-")[0]
-            cmd = msg.split("-")[1]
+            cmd = msg.split(util.CMD_DELIM)[1]
             if cmdType == "joystick":
                 x = cmd.split(":")[0]
-                # y = cmd.split(":")[1]
+                y = cmd.split(":")[1]
                 print(f"time diff was {diff}, x {x} and y {y}")
                 prev = time.time()
                 ESCset = 45 * float(y) + 90
                 turnSet = 90 * float(x) + 90
                 data = [int(turnSet), int(ESCset)]
-                # bus.write_i2c_block_data(address, 1, data)
+                bus.write_i2c_block_data(address, 1, data)
         else:
             pass
 

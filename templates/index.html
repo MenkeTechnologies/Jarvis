@@ -175,17 +175,18 @@
 
         let xCoord = 0;
         let yCoord = 0;
+        let CMD_DELIM = "____";
         joystickView.bind("verticalMove", function (y) {
             yCoord = y;
             $("#yVal").html(yCoord);
-            let data = `joystick-${xCoord}:${yCoord}`;
+            let data = `joystick${CMD_DELIM}${xCoord}:${yCoord}`;
             console.log("\n_____________data = " + data + "_____________\n");
             ws.send(data);
         });
         joystickView.bind("horizontalMove", function (x) {
             xCoord = x;
             $("#xVal").html(xCoord);
-            let data = `joystick-${xCoord}:${yCoord}`;
+            let data = `joystick${CMD_DELIM}${xCoord}:${yCoord}`;
             ws.send(data);
             console.log("\n_____________data = " + data + "_____________\n");
         });
@@ -193,7 +194,7 @@
             $("#xVal").html(0);
             $("#yVal").html(0);
             console.log(`end`);
-            let data = `joystick-0:0`;
+            let data = `joystick${CMD_DELIM}0:0`;
             console.log("\n_____________data = " + data + "_____________\n");
             ws.send(data);
         });
