@@ -21,8 +21,8 @@ async def hello(websocket, path):
             cmdType = msg.split("-")[0]
             cmd = msg.split("-")[1]
             if cmdType == "joystick":
-                x = msg.split(":")[0]
-                y = msg.split(":")[1]
+                x = cmd.split(":")[0]
+                y = cmd.split(":")[1]
                 print(f"time diff was {diff}, x {x} and y {y}")
                 prev = time.time()
                 ESCset = 45 * float(y) + 90
