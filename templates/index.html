@@ -54,7 +54,13 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Driving Console</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-video"></i> Video feed
+                    </a>
+                </li>
             </ul>
+
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <button type="button" class="btn btn-outline-danger">
@@ -69,9 +75,7 @@
 <!-- HEADER -->
 <header id="main-header" class="py-1 bg-light mt-5">
     <div class="container">
-        <h1 class="display-4 text-center">
-            <i class="fas fa-video"></i> Video feed
-        </h1>
+
     </div>
 </header>
 
@@ -94,15 +98,17 @@
     </div>
     <div class="row">
         <label for="speedRange">Speed:</label>
-        <input
-                type="range"
-                class="custom-ranger"
-                min="0"
-                max="1"
-                value="0.5"
-                step="0.5"
-                id="speedRange"
-        />
+        <div class="col-lg-12">
+            <input
+                    type="range"
+                    class="custom-range"
+                    min="0"
+                    max="1"
+                    value="0.5"
+                    step="0.5"
+                    id="speedRange"
+            />
+        </div>
     </div>
 
     <div class="row">
@@ -152,8 +158,8 @@
         let browserWidth = $(window).width();
 
         let joystickViewWidth = 0;
-        if (browserWidth > 700){
-           joystickViewWidth = 500
+        if (browserWidth > 700) {
+            joystickViewWidth = 500
         } else if (browserWidth > 500) {
             joystickViewWidth = 400;
         } else {
