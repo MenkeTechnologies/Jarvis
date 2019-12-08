@@ -105,7 +105,7 @@
                     min="0"
                     max="1"
                     value="0.5"
-                    step="0.5"
+                    step="0.05"
                     id="speedRange"
             />
         </div>
@@ -114,6 +114,7 @@
     <div class="row">
         <div id="coord">
             <p> x: <span id="xVal"></span> y: <span id="yVal"></span>
+                Slider: <span id="sliderVal">0.5</span>
             </p>
         </div>
 
@@ -173,29 +174,41 @@
             }, 0);
         });
 
+        $("#speedRange").on("input", () => {
+            let innerHTML = $("#speedRange").val();
+            $("#sliderVal").text(innerHTML);
+            
+        })
+
         let xCoord = 0;
         let yCoord = 0;
         let CMD_DELIM = "____";
         joystickView.bind("verticalMove", function (y) {
+            let sliderval = $(".custom-range").val();
             yCoord = y;
+            yCoord *= sliderval;
             $("#yVal").html(yCoord);
+
             let data = `joystick${CMD_DELIM}${xCoord}:${yCoord}`;
-            console.log("\n_____________data = " + data + "_____________\n");
+
             ws.send(data);
         });
         joystickView.bind("horizontalMove", function (x) {
+            let sliderval = $(".custom-range").val();
+
             xCoord = x;
+            xCoord *= sliderval;
+
             $("#xVal").html(xCoord);
+
             let data = `joystick${CMD_DELIM}${xCoord}:${yCoord}`;
             ws.send(data);
-            console.log("\n_____________data = " + data + "_____________\n");
         });
         joystickView.bind("end", function (x) {
             $("#xVal").html(0);
             $("#yVal").html(0);
             console.log(`end`);
             let data = `joystick${CMD_DELIM}0:0`;
-            console.log("\n_____________data = " + data + "_____________\n");
             ws.send(data);
         });
     });
