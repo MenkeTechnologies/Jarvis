@@ -182,14 +182,14 @@
             if (xCoord > 1) {
                 xCoord = 1
             }
-            if (xCoord < 0) {
-                xCoord = 0
+            if (xCoord < -1) {
+                xCoord = -1;
             }
             if (yCoord > 1) {
                 yCoord = 1
             }
-            if (yCoord < 0) {
-                yCoord = 0
+            if (yCoord < -1) {
+                yCoord = 1;
             }
         }
 
@@ -199,7 +199,7 @@
             switch (e.keyCode) {
                 case 97:
                     //a
-                    if (xCoord <= 1 && xCoord >= 0) {
+                    if (xCoord <= 1 && xCoord >= -1) {
                         xCoord -= changeVal;
                         resetLimits();
                         $("#xVal").html(xCoord);
@@ -209,7 +209,7 @@
                     break;
                 case 100:
                     //d
-                    if (xCoord <= 1 && xCoord >= 0) {
+                    if (xCoord <= 1 && xCoord >= -1) {
                         xCoord += changeVal;
                         resetLimits();
                         $("#xVal").html(xCoord);
@@ -220,7 +220,7 @@
                     break;
                 case 119:
                     //w
-                    if (yCoord <= 1 && yCoord >= 0) {
+                    if (yCoord <= 1 && yCoord >= -1) {
                         yCoord += changeVal;
                         resetLimits();
                         $("#yVal").html(yCoord);
@@ -230,7 +230,7 @@
                     break;
                 case 115:
                     //s
-                    if (yCoord <= 1 && yCoord >= 0) {
+                    if (yCoord <= 1 && yCoord >= -1) {
                         yCoord -= changeVal;
                         resetLimits();
                         $("#yVal").html(yCoord);
