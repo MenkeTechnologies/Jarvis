@@ -158,9 +158,10 @@
 
         let xCoord = 0;
         let yCoord = 0;
-        let CMD_DELIM = "____";
+        const CMD_DELIM = "____";
         let data = "";
         let browserWidth = $(window).width();
+        const changeVal = 0.05;
 
         let joystickViewWidth = 0;
         if (browserWidth > 700) {
@@ -189,13 +190,12 @@
                 yCoord = 1
             }
             if (yCoord < -1) {
-                yCoord = 1;
+                yCoord = -1;
             }
         }
 
         $(window).keypress(function (e) {
             console.log("\n_____________e.keyCode = " + e.keyCode + "_____________\n");
-            let changeVal = 0.05;
             switch (e.keyCode) {
                 case 97:
                     //a
