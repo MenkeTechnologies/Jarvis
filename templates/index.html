@@ -156,6 +156,10 @@
 
     $(function () {
 
+        let xCoord = 0;
+        let yCoord = 0;
+        let CMD_DELIM = "____";
+        let data = "";
         let browserWidth = $(window).width();
 
         let joystickViewWidth = 0;
@@ -166,7 +170,7 @@
         } else {
             joystickViewWidth = 300
         }
-        console.log("\n_____________joystickViewWidth = " + joystickViewWidth + "_____________\n");
+
         let joystickView = new JoystickView(joystickViewWidth, function (callbackView) {
             $("#joystickContent").append(callbackView.render().el);
             setTimeout(function () {
@@ -174,21 +178,83 @@
             }, 0);
         });
 
+        function resetLimits() {
+            if (xCoord > 1) {
+                xCoord = 1
+            }
+            if (xCoord < 0) {
+                xCoord = 0
+            }
+            if (yCoord > 1) {
+                yCoord = 1
+            }
+            if (yCoord < 0) {
+                yCoord = 0
+            }
+        }
+
+        $(window).keypress(function (e) {
+            console.log("\n_____________e.keyCode = " + e.keyCode + "_____________\n");
+            let changeVal = 0.05;
+            switch (e.keyCode) {
+                case 97:
+                    //a
+                    if (xCoord <= 1 && xCoord >= 0) {
+                        xCoord -= changeVal;
+                        resetLimits();
+                        $("#xVal").html(xCoord);
+                        data = `joystick${CMD_DELIM}${xCoord}:${yCoord}`;
+                        ws.send(data);
+                    }
+                    break;
+                case 100:
+                    //d
+                    if (xCoord <= 1 && xCoord >= 0) {
+                        xCoord += changeVal;
+                        resetLimits();
+                        $("#xVal").html(xCoord);
+
+                        data = `joystick${CMD_DELIM}${xCoord}:${yCoord}`;
+                        ws.send(data);
+                    }
+                    break;
+                case 119:
+                    //w
+                    if (yCoord <= 1 && yCoord >= 0) {
+                        yCoord += changeVal;
+                        resetLimits();
+                        $("#yVal").html(yCoord);
+                        data = `joystick${CMD_DELIM}${xCoord}:${yCoord}`;
+                        ws.send(data);
+                    }
+                    break;
+                case 115:
+                    //s
+                    if (yCoord <= 1 && yCoord >= 0) {
+                        yCoord -= changeVal;
+                        resetLimits();
+                        $("#yVal").html(yCoord);
+                        data = `joystick${CMD_DELIM}${xCoord}:${yCoord}`;
+                        ws.send(data);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
+
+
         $("#speedRange").on("input", () => {
             let innerHTML = $("#speedRange").val();
             $("#sliderVal").text(innerHTML);
-            
+
         })
 
-        let xCoord = 0;
-        let yCoord = 0;
-        let CMD_DELIM = "____";
         joystickView.bind("verticalMove", function (y) {
             let sliderval = $(".custom-range").val();
             yCoord = y;
             yCoord *= sliderval;
             $("#yVal").html(yCoord);
-
             let data = `joystick${CMD_DELIM}${xCoord}:${yCoord}`;
 
             ws.send(data);
