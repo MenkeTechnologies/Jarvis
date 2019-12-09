@@ -32,8 +32,9 @@
     <title>Jarvis  - Login Page</title>
 </head>
 <body>
-        <div class="d-flex justify-content-center align-items-center login-container">
-                <form method="POST" action="" class="login-form text-center">
+        <div class="d-flex justify-content-center align-items-center login-container bg-light">
+                <form method="POST" action="" class="login-form text-center p-5
+                shadow-lg rounded-lg bg-dark">
                     {{ form.hidden_tag() }}
                     {% with messages = get_flashed_messages(with_categories=true) %}
                         {% if messages %}
@@ -44,7 +45,7 @@
                             {% endfor %}
                         {% endif %}
                     {% endwith %}
-                    <h1 class="mb-5 font-weight-light text-uppercase"><i class="fas fa-taxi"></i> JARVIS</a
+                    <h1 class="mb-5 font-weight-light text-white text-uppercase"><i class="fas fa-taxi"></i> JARVIS</a
                         ></h1>
                     <div class="form-group">
                         {{ form.username(class="form-control rounded-pill form-control-lg") }}
@@ -52,7 +53,7 @@
                     <div class="form-group">
                         {{ form.password(class="form-control rounded-pill form-control-lg") }}
                     </div>
-                    {{ form.submit(class="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase") }}
+                    {{ form.submit(class="btn mt-5 rounded-pill btn-lg btn-outline-success btn-custom btn-block text-uppercase") }}
                 </form>
             </div>
 <script
