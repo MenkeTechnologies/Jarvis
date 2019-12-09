@@ -28,9 +28,9 @@ void loop()
 currentTime = millis();
 if (currentTime > lastCall + dcMonitor)
 {
-  //setTurn(90);
-  //setThrottle(90);
-  //delay(100);
+  setTurn(90);
+  setThrottle(90);
+  delay(100);
 }
 
 }
