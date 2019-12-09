@@ -63,9 +63,10 @@
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <button type="button" class="btn btn-outline-danger">
+                    <a class="btn btn-outline-danger" href="{{ url_for('logout') }}"
+                        role="button">
                         <i class="fas fa-sign-out-alt"></i> Log Out
-                    </button>
+                    </a>
                 </li>
             </ul>
         </div>
